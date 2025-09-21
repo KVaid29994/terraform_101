@@ -1,0 +1,59 @@
+- why, what terraform?
+- terraform plan, apply and destroy 
+- how to make changes to existing config
+- what is state file in terraform
+- terraform variable ( used by var.variablename)
+    - you can create a single file of variables (called variables.tf) in the same folder
+    
+ ----------
+
+ - Output: outputs.tf is used to define and expose specific values (like instance IDs, IPs, or ARNs) from your Terraform configuration after apply, so they can be viewed or reused by other modules.
+    - this comes as output when you do aws apply
+
+- to upload anything to s3.. tf website.. aws_s3_object
+
+=====================================================================
+
+random_id = provides a random number like random_id, random_integer,random_password, random_pet, random_shuffle, random_uuid
+
+==================
+terraform tf.state
+- manage using "backend block"
+
+========================================
+Steps for static website hosting on AWS s3 bucket
+- create html and css file
+- create s3 bucket --> allow public url/access --> add a bucket policy-->Enable S3 static website hosting--> Upload your files --> output the website url
+
+=======================================================================
+
+VPC - virtual private cloud - region specific -- you define a CIDR block --> that gives us some IPs (range of Ips is allocated)
+
+CIDR block = 10.0.0.0\16 (65k ips are created)
+last(16) --hosting purpose
+first -- network access
+
+Subent - availability zone specific
+- public and private Subent
+    - 10.0.1.0/24 (256 ips, of which 251 usable)
+    - 10.0.2.0/24 
+instance -- belong to Subent
+
+
+Subnet ke ader -----
+==========================================================================
+
+route table -- set of routes --used to determine where network traffic from your subnets or gateway is directed
+
+internet gateway --> communication between instance in your vpc and the internet
+
+security groups --> controls inbound and outbound traffic for instance
+
+---------------------------------------------------------------------------
+
+VPC creation using Terraform
+- A VPC with CIDR block of 10.0.0.0\16
+- One public subnet with 10.0.1.0\24
+- One private subnet with 10.0.2.0\24
+- One internet gateway
+- One public route table with a route to internet gateway and correct association between the public subnet and public route table

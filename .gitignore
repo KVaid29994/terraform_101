@@ -1,0 +1,26 @@
+# Ignore all Terraform state files recursively
+**/*.tfstate
+**/*.tfstate.backup
+
+# Ignore all .terraform directories recursively
+**/.terraform/
+
+# Ignore tfvars (sensitive info)
+**/*.tfvars
+
+# Crash logs
+**/crash.log
+
+# CLI config files
+**/.terraformrc
+**/terraform.rc
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.swp
+*.swo

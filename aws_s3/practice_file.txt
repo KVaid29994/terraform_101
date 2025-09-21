@@ -1,0 +1,14 @@
+- why, what terraform?
+- terraform plan, apply and destroy 
+- how to make changes to existing config
+- what is state file in terraform
+- terraform variable ( used by var.variablename)
+    - you can create a single file of variables (called variables.tf) in the same folder
+    
+ ----------
+
+ - Output: outputs.tf is used to define and expose specific values (like instance IDs, IPs, or ARNs) from your Terraform configuration after apply, so they can be viewed or reused by other modules.
+    - this comes as output when you do aws apply
+
+
+=====================================================================
