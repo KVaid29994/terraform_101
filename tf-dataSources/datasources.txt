@@ -1,0 +1,13 @@
+Terraform Data Source Overview
+
+Terraform data sources allow you to retrieve and use dynamic information from:
+- 🌐 External sources (e.g., public APIs, remote state files)
+- ☁️ Existing resources within your cloud infrastructure (e.g., AWS EC2 instances, S3 buckets)
+
+This is especially useful for:
+- 🔄 Referencing live configuration data
+- 🧩 Dynamically linking resources without hardcoding values
+- 📦 Ensuring your infrastructure definitions stay modular and reusabl
+
+
+## Retrieve dynamic data
