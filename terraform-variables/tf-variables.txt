@@ -33,3 +33,22 @@ Terraform supports multiple ways to assign values to variables:
 - Environment variables (TF_VAR_region=us-east-1)
 - Variable definition files (terraform.tfvars)
 - Terraform Cloud workspaces
+
+===========================================================================
+
+Terraform variable attribute:
+
+- type: Defines the kind of data (e.g., string, number, bool, list, map).
+- description: Explains what the variable is used for.
+- default: Sets a fallback value if none is provided.
+- validation: Adds rules to check if the input is acceptable.
+        - condition and error_message to be defined
+- sensitive: Hides the value from CLI output to protect secrets.
+
+===================================================================
+In Terraform, an object is a complex variable type that lets you group multiple named attributes—each with its own type—into a single structured value. It’s like a mini-record or dictionary with a fixed schema
+
+
+
+
+
