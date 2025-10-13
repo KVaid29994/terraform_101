@@ -48,7 +48,84 @@ Terraform variable attribute:
 ===================================================================
 In Terraform, an object is a complex variable type that lets you group multiple named attributes—each with its own type—into a single structured value. It’s like a mini-record or dictionary with a fixed schema
 
+===================================================================
+
+🗺️ Terraform map Variable 
+- type: map holds key-value pairs where all values share the same type.
+- description: Used to group related values under named keys (like tags or settings).
+- default: Can be set with { key1 = "value1", key2 = "value2" }.
+- access: Use var.map_name["key"] to retrieve a specific value.
+- use case: Ideal for tags, environment configs, or region-specific settings.
+
+🧪 Example
+variable "tags" {
+  type        = map(string)
+  default     = {
+    environment = "dev"
+    owner       = "kashish"
+  }
+}
+
+==========================================================================
+
+🌱 Environment Variables in Terraform
 
 
+Environment variables are used to pass configuration values into Terraform without hardcoding them. They follow the naming pattern TF_VAR_<variable_name> and are automatically mapped to input variables. This method is useful for automation, CI/CD pipelines, and keeping sensitive data (like credentials) out of source files.
+Example:
+bash:
+
+export TF_VAR_aws_instance_type = "t3.micro"
+
+powershell : $env:TF_VAR_aws_instance_type = "t3.micro"
 
 
+===================================================================
+
+📄 terraform.tfvars in Terraform
+terraform.tfvars is a special file used to assign values to input variables in a Terraform configuration. It allows you to separate variable definitions from your main .tf files, making your code cleaner and easier to manage across environments. Terraform automatically loads this file when you run commands like terraform plan or terraform apply.
+
+
+You can also use custom .tfvars files and load them manually with -var-file.
+
+====================================================================
+
+
+⚙️ auto.tfvars in Terraform
+
+
+auto.tfvars is a special file that Terraform automatically loads without needing to specify it manually. It’s used to assign values to input variables, just like terraform.tfvars, but with the added benefit of auto-loading based on its filename. You can also use multiple files like dev.auto.tfvars, prod.auto.tfvars, etc., to manage environment-specific configurations.
+
+Example:
+region        = "us-west-2"
+instance_type = "t3.medium"
+
+
+Terraform loads all *.auto.tfvars files in the working directory during plan and apply.
+
+==============================================================
+
++-----------------------------+
+| 1. CLI flags (-var)        |
++-----------------------------+
+            ↓
++-----------------------------+
+| 2. Environment variables    |
+|    (TF_VAR_name)           |
++-----------------------------+
+            ↓
++-----------------------------+
+| 3. terraform.tfvars file   |
++-----------------------------+
+            ↓
++-----------------------------+
+| 4. *.auto.tfvars files     |
++-----------------------------+
+            ↓
++-----------------------------+
+| 5. -var-file (manual load) |
++-----------------------------+
+            ↓
++-----------------------------+
+| 6. Default values in code  |
++-----------------------------+

@@ -11,6 +11,11 @@ provider "aws" {
   region = "us-east-1"
 }
 
+locals {
+  owner = "Kashish"
+  Name = "myserver"
+}
+
 resource "aws_instance" "myserver" {
     ami = "ami-0c55b159cbfafe1f0"
     instance_type = var.aws_instance_type
@@ -23,9 +28,9 @@ resource "aws_instance" "myserver" {
       volume_type = var.ec2_config.v_type
     }
 
-    tags = {
-      Name = "SampleServerbyKV"
-    }
+    tags = merge(var.additional_tags,{
+      Name = local.Name
+    })
   
 }
 

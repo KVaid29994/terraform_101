@@ -32,3 +32,9 @@ variable "ec2_config" {
     v_type = "gp2"
   }
 }
+
+variable "additional_tags" {
+  type = map(string) #expecting key = value format
+  default = { stage = "prod"
+  }
+}
