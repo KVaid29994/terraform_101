@@ -1,0 +1,2 @@
+terraform function inbuilt
+terraform operators and expressions
