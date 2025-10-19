@@ -1,0 +1,21 @@
+🧱 What Is a Terraform Module?
+
+A Terraform module is a collection of .tf and/or tf.json configuration files grouped together to manage a specific set of resources. Think of it as a reusable package of Terraform code that encapsulates infrastructure logic.
+
+
+There are two types of modules:
+- Root module: The main directory where Terraform is run. Every Terraform configuration has at least a root module.
+- Child module: Any module called from another module using a module block.
+
+
+🔁 Why Use Modules?
+- Reusability: Define infrastructure patterns once and reuse them across environments or projects.
+- Abstraction: Hide complexity behind a simple interface using input variables and outputs.
+- Organization: Break large configurations into smaller, manageable components.
+- Consistency: Enforce standards across teams and environments.
+
+terraform-s3-module/
+├── README.md
+├── main.tf
+├── variables.tf
+├── outputs.tf
