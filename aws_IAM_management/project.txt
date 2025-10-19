@@ -1,0 +1,5 @@
+- provide user and roles info via YAML file
+- read the YAML file and process data
+- create IAM users
+- generate passwords for the user
+- attach policy/roles to each users
