@@ -1,0 +1,66 @@
+Absolutely, Kashish! Here's a modular, example-driven cheat sheet on **Terraform Workspaces** — perfect for managing environment-specific deployments like `dev`, `staging`, and `prod`.
+
+---
+
+## 🧠 What Is a Terraform Workspace?
+
+A **workspace** is an isolated instance of Terraform state. It lets you reuse the same configuration across multiple environments without duplicating code.
+
+- Each workspace has its own `.tfstate` file.
+- Ideal for managing **multiple environments** with shared infrastructure logic.
+
+---
+
+## 🧩 Default Behavior
+
+- Terraform starts in the **default** workspace.
+- You can create and switch to other workspaces as needed.
+
+---
+
+## 🛠️ Workspace Commands
+
+| Command                              | Description                                           |
+|--------------------------------------|-------------------------------------------------------|
+| `terraform workspace list`           | Shows all available workspaces                        |
+| `terraform workspace show`           | Displays the current active workspace                 |
+| `terraform workspace new <name>`     | Creates a new workspace                               |
+| `terraform workspace select <name>`  | Switches to an existing workspace                     |
+| `terraform workspace delete <name>`  | Deletes a workspace (must not be active)              |
+
+---
+
+## 🧪 Example Workflow
+
+```bash
+terraform workspace new dev
+terraform workspace select dev
+terraform apply
+```
+
+This creates a `dev` workspace, switches to it, and applies your infrastructure using a separate state file.
+
+---
+
+## 📦 Using Workspace in Code
+
+You can reference the current workspace in your config:
+
+```hcl
+resource "aws_s3_bucket" "env_bucket" {
+  bucket = "my-app-${terraform.workspace}"
+  acl    = "private"
+}
+```
+
+This creates environment-specific buckets like `my-app-dev`, `my-app-prod`, etc.
+
+---
+
+## 🧠 Pro Tips
+
+- Use workspaces for **parallel environments**, not for resource separation within the same environment.
+- Combine with `terraform.tfvars` or `locals` for full environment modularity.
+- Avoid using workspaces for complex multi-region or multi-account setups — modules or separate directories are better.
+
+---
