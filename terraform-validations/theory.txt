@@ -1,0 +1,97 @@
+### 🌍 **Terraform Validations — Theory**
+
+Terraform validation mechanisms help ensure **data integrity** and **logical consistency** in your configurations **before and after** resource creation.
+
+---
+
+## **1. Validation Types**
+
+### **a. Input Variable Validation**
+
+* Defined inside a variable block using the `validation` argument.
+* Ensures input values meet specific conditions **before plan/apply**.
+
+**Syntax:**
+
+```hcl
+variable "instance_type" {
+  type = string
+  validation {
+    condition     = contains(["t2.micro", "t3.micro"], var.instance_type)
+    error_message = "Instance type must be t2.micro or t3.micro."
+  }
+}
+```
+
+✅ Used for: **Ensuring correct variable inputs**.
+🕒 Checked **before planning**.
+
+---
+
+## **2. Precondition**
+
+* Declared inside **resource** or **module** blocks.
+* Used to verify **assumptions about inputs or environment** before creating the resource.
+
+**Syntax:**
+
+```hcl
+resource "aws_instance" "example" {
+  ami           = var.ami
+  instance_type = var.instance_type
+
+  lifecycle {
+    precondition {
+      condition     = var.instance_type != ""
+      error_message = "Instance type must not be empty."
+    }
+  }
+}
+```
+
+✅ Used for: **Validating configurations before resource creation.**
+🕒 Checked **before apply (pre-creation stage).**
+
+---
+
+## **3. Postcondition**
+
+* Declared inside **resource**, **data**, or **output** blocks.
+* Ensures that the **final state** after creation or read satisfies expectations.
+
+**Syntax:**
+
+```hcl
+resource "aws_instance" "example" {
+  ami           = var.ami
+  instance_type = var.instance_type
+
+  lifecycle {
+    postcondition {
+      condition     = self.ami != ""
+      error_message = "AMI must be assigned after creation."
+    }
+  }
+}
+```
+
+✅ Used for: **Validating the resource’s actual attributes after creation or read.**
+🕒 Checked **after apply (post-creation stage).**
+
+---
+
+## **4. Validation Failure Behavior**
+
+* If a **precondition** or **input validation** fails → Terraform stops before creation.
+* If a **postcondition** fails → Terraform marks the apply as **failed** even if the resource is created.
+
+---
+
+## **5. Use Cases Summary**
+
+| Validation Type     | Where Defined          | When Checked | Purpose                     |
+| ------------------- | ---------------------- | ------------ | --------------------------- |
+| Variable Validation | In `variable` block    | Before Plan  | Validate user input         |
+| Precondition        | Inside resource/module | Before Apply | Validate inputs/environment |
+| Postcondition       | Inside resource/output | After Apply  | Validate resource state     |
+
