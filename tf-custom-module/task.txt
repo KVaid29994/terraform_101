@@ -1,0 +1,8 @@
+Requirements
+- Accept cidr_block from user to create VPC
+- User can create multiple subnets
+- Get CIDR block for subnet from user
+- AZs (availability zone)
+- User can mark a subnet as public (default is private)
+- If public, create IGW
+- Associate public subnet with Routing table
