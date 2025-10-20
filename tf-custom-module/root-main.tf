@@ -7,10 +7,17 @@ module "vpc_module" {
   }
 
   subnet_config = {
-    public_subnet = {
+    public_subnet-1 = {
       cidr_block = "10.0.0.0/24"
       az         = "us-east-1b"
+      public = true
     }
+    public_subnet-2 = {
+      cidr_block = "10.0.2.0/24"
+      az         = "us-east-1b"
+      public = true
+    }
+
 
     private_subnet = {
       cidr_block = "10.0.1.0/24"
@@ -18,3 +25,4 @@ module "vpc_module" {
     }
   }
 }
+
